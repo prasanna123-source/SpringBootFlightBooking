@@ -3,40 +3,36 @@ package com.app.booking.model;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class FlightBooking {
 
 	@Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE)
-	private String flightbookingId;
-	
-//	private Passenger passenger;
-//	private Flight flight;
-	
-	@ManyToMany(mappedBy = "bookings", fetch = FetchType.LAZY)
-	private Set<Flight> flights;
-	
+	private int flightbookingId;	
 	private String source;
 	private String destination;
 	private Date journeyDate;
-	
 
-	public String getFlightbookingId() {
+	
+	public int getFlightbookingId() {
 		return flightbookingId;
 	}
 
-	public void setFlightbookingId(String flightbookingId) {
+	public void setFlightbookingId(int flightbookingId) {
 		this.flightbookingId = flightbookingId;
 	}
 
-	
 	public String getSource() {
 		return source;
 	}
@@ -61,13 +57,7 @@ public class FlightBooking {
 		this.journeyDate = journeyDate;
 	}
 
-	public Set<Flight> getFlights() {
-		return flights;
-	}
-
-	public void setFlights(Set<Flight> flights) {
-		this.flights = flights;
-	}
+	
 
 
 }

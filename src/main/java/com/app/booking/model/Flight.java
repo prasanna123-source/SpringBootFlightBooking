@@ -1,6 +1,8 @@
 package com.app.booking.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -12,7 +14,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class Flight {
@@ -25,17 +32,27 @@ public class Flight {
 	private String flightName;
 	private String source;
 	private String destination;
+	private int noOfSeats;
+	
+
+	public int getNoOfSeats() {
+		return noOfSeats;
+	}
+
+	public void setNoOfSeats(int noOfSeats) {
+		this.noOfSeats = noOfSeats;
+	}
+
+	@Temporal(value=TemporalType.DATE)
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	private Date journeyDate;
 	
-	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
-	@JoinTable(name = "Flight_bookings_join", 
-	joinColumns = @JoinColumn(name="flightId"),
-	inverseJoinColumns = @JoinColumn(name="flightbookingId"))	
-	private Set<FlightBooking> bookings;
+	@OneToMany(cascade = CascadeType.ALL)	
+	private List<FlightBooking> bookings;
 	
-	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "flightAvailabilityId")
-    private FlightAvailability flightAvailability;
+//	@OneToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "flightAvailabilityId")
+//    private FlightAvailability flightAvailability;
 
 	public int getFlightId() {
 		return flightId;
@@ -76,21 +93,21 @@ public class Flight {
 	public void setJourneyDate(Date journeyDate) {
 		this.journeyDate = journeyDate;
 	}
-
-	public Set<FlightBooking> getBookings() {
+		
+	public List<FlightBooking> getBookings() {
 		return bookings;
 	}
 
-	public void setBookings(Set<FlightBooking> bookings) {
+	public void setBookings(List<FlightBooking> bookings) {
 		this.bookings = bookings;
 	}
 
-	public FlightAvailability getFlightAvailability() {
-		return flightAvailability;
-	}
-
-	public void setFlightAvailability(FlightAvailability flightAvailability) {
-		this.flightAvailability = flightAvailability;
-	}	
+//	public FlightAvailability getFlightAvailability() {
+//		return flightAvailability;
+//	}
+//
+//	public void setFlightAvailability(FlightAvailability flightAvailability) {
+//		this.flightAvailability = flightAvailability;
+//	}	
 	
 }

@@ -1,6 +1,5 @@
 package com.app.booking.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -21,7 +20,7 @@ public class User {
 	private String userName;
     
 	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "passengerId")
+    @JoinColumn(name = "userId")
 	private Passenger passenger;
 	
 	public int getUserId() {

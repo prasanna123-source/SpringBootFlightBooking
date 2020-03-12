@@ -17,11 +17,10 @@ public class FlightAvailability {
 	private int userId;
 	private int passengerId;
     private boolean availability;
-    private String toLocation;
-    private String fromLocation;
     
-    @OneToOne(mappedBy = "flightAvailability")            
-    private Flight flight;
+    
+//    @OneToOne(mappedBy = "flightAvailability")            
+//    private Flight flight;
     
 	public int getFlightAvailabilityId() {
 		return flightAvailabilityId;
@@ -47,25 +46,13 @@ public class FlightAvailability {
 	public void setAvailability(boolean availability) {
 		this.availability = availability;
 	}
-	
-	public String getFromLocation() {
-		return fromLocation;
-	}
-	public void setFromLocation(String fromLocation) {
-		this.fromLocation = fromLocation;
-	}
-	public String getToLocation() {
-		return toLocation;
-	}
-	public void setToLocation(String toLocation) {
-		this.toLocation = toLocation;
-	}
-	public Flight getFlight() {
-		return flight;
-	}
-	public void setFlight(Flight flight) {
-		this.flight = flight;
-	}
+		
+//	public Flight getFlight() {
+//		return flight;
+//	}
+//	public void setFlight(Flight flight) {
+//		this.flight = flight;
+//	}
     
     
 }

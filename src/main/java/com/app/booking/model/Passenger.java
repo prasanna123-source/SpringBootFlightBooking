@@ -1,5 +1,6 @@
 package com.app.booking.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,8 +16,7 @@ public class Passenger {
     @GeneratedValue(strategy= GenerationType.SEQUENCE)
 	private int passengerId;
 	
-	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId")
+	@OneToOne(mappedBy = "passenger",cascade=CascadeType.ALL)    
 	private User user;
 	
 	//@NotEmpty(message = "Please Enter passengerName")

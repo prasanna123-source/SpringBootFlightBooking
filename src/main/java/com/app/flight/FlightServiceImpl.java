@@ -1,5 +1,8 @@
 package com.app.flight;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +24,17 @@ public class FlightServiceImpl {
 //		return flightRepo.findById(flightId).orElseThrow(() -> new FlightNotFoundException(flightId));
 //	}
 	
-	public List<Flight> saveFlight(List<Flight> flight) {
-		return flightRepo.saveAll(flight);
-         
-	}
-
-	public List<Flight> getAllFlights(String sourcename) {
-		return flightRepo.findByFlightSource(sourcename);
+	
+	public List<Flight> getAllFlights(String sourcename,String destination,String journeyDate) {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");		 			
+		 Date date1 = null;
+		try {
+			date1 = formatter.parse(journeyDate);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return flightRepo.findByFlightSource(sourcename,destination,date1);
 	}
 
 }
